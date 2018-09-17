@@ -37,7 +37,7 @@
             </p>
             <p>
                 <label class="field" for="description">Description<?php echo in_array('description', $required) ? '<span> *</span>' : ''; ?></label>
-                <textarea id="description" name="description" rows="10" cols="30" value="<?php echo isset($fields['description']) ? $fields['description'] : ''; ?>"></textarea>
+                <textarea id="description" name="description" rows="10" cols="30"><?php echo isset($fields['description']) ? $fields['description'] : ''; ?></textarea>
                 <?php if(key_exists('description', $maxLengths)) echo "<span class='max-len'>(iki {$maxLengths['description']} simb.)</span>"; ?>
             </p>
             <p>

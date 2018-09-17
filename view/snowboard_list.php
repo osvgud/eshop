@@ -22,14 +22,14 @@
     <div class="errorBox">
         Klientas nerastas!
     </div>
-<?php } ?>
+<?php } $name = 'name'; $description = 'description'; $price = 'price';?>
 
     <table>
         <tr>
             <th>Image</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
+            <th><?php echo "<a href='".routing::getURL($module, 'sort', 'id='.$name)."'>Name</a>"; ?></th>
+            <th><?php echo "<a href='".routing::getURL($module, 'sort', 'id='.$description)."'>Description</a>"; ?></th>
+            <th style="padding-right: 0;"><?php echo "<a href='".routing::getURL($module, 'sort', 'id='.$price)."'>Price</a>"; ?></th>
             <th></th>
         </tr>
         <?php
@@ -49,7 +49,7 @@
                     . "<a href='#' onclick='showConfirmDialog(\"{$module}\", \"{$val['id']}\"); return false;' title=''>šalinti</a>&nbsp;";
             }
             else{
-                echo "<a href='".routing::getURL('cart_item', 'create', 'id='.$val['id'])."'>ORDER NOW</a>";
+                echo "<a href='".routing::getURL('cart_item', 'create', 'id='.$val['id'])."'>ADD TO CART</a>";
 
             }
             echo

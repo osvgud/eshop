@@ -69,6 +69,30 @@ class orderController {
         }
     }
 
+    public function editAction() {
+        $id = orders::getOrderByUser($_SESSION['username']);
+
+        $order = orders::getOrder($id);
+        if ($order == false) {
+            routing::redirect(routing::getModule(), 'list', 'id_error=1');
+            return;
+        }
+
+        $template = template::getInstance();
+        $template->assign('fields', $order);
+
+        $data = $this->validateInput();
+        if ($data) {
+            $data['id'] = $id;
+
+            orders::updateOrder($data);
+            orders::createOrderForUser();
+            routing::redirect(routing::getModule(), 'list');
+        } else {
+            $this->showForm();
+        }
+    }
+
     private function showForm()
     {
         $template = template::getInstance();

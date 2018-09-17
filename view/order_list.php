@@ -24,6 +24,10 @@
         <tr>
             <th>First Name</th>
             <th>Last Name</th>
+            <th>Sum Price</th>
+            <th>Snowboard Name</th>
+            <th>Snowboard Price</th>
+            <th></th>
             <th></th>
         </tr>
         <?php
@@ -34,6 +38,10 @@
                 "<tr>"
                 . "<td>{$val['first_name']}</td>"
                 . "<td>{$val['last_name']}</td>"
+                . "<td>{$val['sum_price']}</td>"
+                . "<td>{$val['snowboard_name']}</td>"
+                . "<td>{$val['snowboard_price']}</td>"
+                . "<td><img id='snow_list' src='images/{$val['image']}'</td>"
                 . "<td>"
 //                . "<a href='#' onclick='showConfirmDialog(\"{$module}\", \"{$val['asmens_kodas']}\"); return false;' title=''>šalinti</a>&nbsp;"
 //                . "<a href='" . routing::getURL($module, 'edit', 'id=' . $val['id']), "' title=''>užsakyti</a>"

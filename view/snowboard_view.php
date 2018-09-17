@@ -24,7 +24,7 @@
                     ."</td>"
                     ."</tr>"
                     ."<tr>"
-                    ."<a href='".routing::getURL($nextModule, 'create')."'>ORDER NOW</a>"
+                    ."<a href='".routing::getURL('cart_item', 'create', 'id='.$data['id'])."'>ADD TO CART</a>"
                     ."</tr>"
                 ?>
         </tbody>

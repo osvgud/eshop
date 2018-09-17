@@ -37,8 +37,7 @@
             </p>
             <p>
                 <label class="field" for="price">Price<?php echo in_array('price', $required) ? '<span> *</span>' : ''; ?></label>
-                <input type="text" id="price" name="price" class="textbox-250" value="<?php echo isset($fields['price']) ? $fields['price'] : ''; ?>" />
-                <?php if(key_exists('price', $maxLengths)) echo "<span class='max-len'>(iki {$maxLengths['price']} simb.)</span>"; ?>
+                <span class="input-value"><?php echo $fields['price']; ?></span>
             </p>
         </fieldset>
         <p class="required-note">* pažymėtus laukus užpildyti privaloma</p>

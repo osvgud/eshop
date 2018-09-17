@@ -3,6 +3,7 @@
 require_once 'utils/paging.class.php';
 require_once 'utils/validator.class.php';
 require_once 'model/cart_items.class.php';
+require_once 'model/orders.class.php';
 
 class cart_itemController {
 
@@ -53,15 +54,18 @@ class cart_itemController {
         // If entered data was valid
         if ($_SESSION['username'] != 'Svečias' && $_SESSION['username'] != '') {
             // Insert row into database
-            if (cart_items::insertItem($_SESSION['username'], $id)) {
-                // Redirect back to the list
-                routing::redirect($_SESSION['currMod'], 'list');
-            } else {
-                // Overwrite fields array with submitted $_POST values
-                $template = template::getInstance();
-                $template->assign('fields', $_POST);
-                $template->assign('formErrors', "Duplicate ID!");
-                $this->showForm();
+            $orderid = orders::getOrderByUser($_SESSION['username']);
+            if($orderid) {
+                if (cart_items::insertItem($_SESSION['username'], $id, $orderid)) {
+                    // Redirect back to the list
+                    routing::redirect($_SESSION['currMod'], 'list');
+                } else {
+                    // Overwrite fields array with submitted $_POST values
+                    $template = template::getInstance();
+                    $template->assign('fields', $_POST);
+                    $template->assign('formErrors', "Duplicate ID!");
+                    $this->showForm();
+                }
             }
         } else {
             $this->showForm();

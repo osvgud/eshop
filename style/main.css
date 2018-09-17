@@ -195,6 +195,12 @@ td#cart_small {
     vertical-align: middle;
 }
 
+td#cart_delete
+{
+    vertical-align: middle;
+    padding-left: 20px;
+}
+
 #contentMain table td {
     padding: 8px 25px;
     text-align: center;
@@ -642,6 +648,13 @@ div.popup:hover + .onHover {
     z-index: 99999;
 }
 
+.popup{
+    font-size: 20px;
+    padding-bottom: 7px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
 .onHover:hover {
     display: block;
     position: absolute;
@@ -658,5 +671,6 @@ div.popup:hover + .onHover {
 
 p#cart_price_small {
     text-align: center;
+    font-size: 20px;
 }
 

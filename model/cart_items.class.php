@@ -34,14 +34,36 @@ class cart_items
         return $data;
     }
 
-    public static function getItemsListCart($uid) {
-        $query = "SELECT * FROM `" . DB_PREFIX . "cart_items` WHERE fk_user='".$uid."'";
-        $parameters = array();
+    public static function getItemsListOrder($orderid) {
+        $query = "SELECT * FROM `" . DB_PREFIX . "cart_items` WHERE fk_order = ?";
+        $parameters = array(
+            $orderid
+        );
 
         $stmt = mysql::getInstance()->prepare($query);
         $stmt->execute($parameters);
         $data = $stmt->fetchAll();
         return $data;
+    }
+
+    public static function getItemsListCart($uid, $orderid) {
+        $query = "SELECT * FROM `" . DB_PREFIX . "cart_items` WHERE fk_user = ? and fk_order = ?";
+        $parameters = array(
+            $uid,
+            $orderid
+        );
+
+        $stmt = mysql::getInstance()->prepare($query);
+        $stmt->execute($parameters);
+        $data = $stmt->fetchAll();
+        return $data;
+    }
+
+    public static function getItemsListCountCart($uid, $orderid) {
+        $query = "SELECT COUNT(`id`) AS `count` FROM `" . DB_PREFIX . "cart_items` WHERE fk_user ='".$uid."' and fk_order='".$orderid."'";
+        $stmt = mysql::getInstance()->query($query);
+        $data = $stmt->fetchAll();
+        return $data[0]['count'];
     }
 
     public static function getItemsListCount($uid) {
@@ -51,17 +73,19 @@ class cart_items
         return $data[0]['count'];
     }
 
-    public static function insertItem($fk_user, $fk_snowboard) {
+    public static function insertItem($fk_user, $fk_snowboard, $fk_order) {
         $query = "INSERT INTO `" . DB_PREFIX . "cart_items`
       (
         `fk_user`,
-        `fk_snowboard`
+        `fk_snowboard`,
+        `fk_order`
       ) 
-      VALUES (?, ?)";
+      VALUES (?, ?, ?)";
         $stmt = mysql::getInstance()->prepare($query);
         $parameters = array(
             $fk_user,
-            $fk_snowboard
+            $fk_snowboard,
+            $fk_order
         );
         try {
             $stmt->execute($parameters);

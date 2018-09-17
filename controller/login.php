@@ -2,6 +2,7 @@
 require_once 'utils/paging.class.php';
 require_once 'utils/validator.class.php';
 require_once  'model/users.class.php';
+require_once  'model/orders.class.php';
 
 class loginController {
     public static $defaultAction = "create";
@@ -56,8 +57,12 @@ class loginController {
         if ($data) {
             // Insert row into database
             if (users::checkUser($data)) {
+                $_SESSION['orderby'] = 'niekas';
+                if(orders::getOrderInprogress($_SESSION['username']))
+                {
+                    orders::createOrderForUser();
+                }
                 // Redirect back to the list
-                $_SESSION['kreps_count'] = 5;
                 routing::redirect(routing::getModule(), 'list');
             } else {
                 // Overwrite fields array with submitted $_POST values
@@ -72,6 +77,6 @@ class loginController {
     }
 
     public function listAction() {
-        header('location: /nfq/index.php?module=snowboard');
+        header('location: /eshop/index.php?module=snowboard');
     }
 }

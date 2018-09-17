@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by IntelliJ IDEA.
+ * User: osvgud
+ * Date: 2018-09-12
+ * Time: 17:53
+ */
 
 class snowboards {
 
@@ -34,6 +40,26 @@ class snowboards {
         return $data;
     }
 
+    public static function getSnowboardsListOrder($limit = null, $offset = null, $orderby) {
+        $query = "SELECT * FROM `" . DB_PREFIX . "snowboards` ORDER BY ".$orderby." ".$_SESSION['fromto'];
+
+        $parameters = array();
+
+        if(isset($limit)) {
+            $query .= " LIMIT ?";
+            $parameters[] = $limit;
+        }
+        if(isset($offset)) {
+            $query .= " OFFSET ?";
+            $parameters[] = $offset;
+        }
+
+        $stmt = mysql::getInstance()->prepare($query);
+        $stmt->execute($parameters);
+        $data = $stmt->fetchAll();
+        return $data;
+    }
+
     public static function getSnowboardsListCount() {
         $query = "SELECT COUNT(`id`) AS `count` FROM `" . DB_PREFIX . "snowboards`";
         $stmt = mysql::getInstance()->query($query);
@@ -47,15 +73,17 @@ class snowboards {
         `name`,
         `price`,
         `description`,
-        `image`
+        `image`,
+        `warranty`
       ) 
-      VALUES (?, ?, ?, ?)";
+      VALUES (?, ?, ?, ?, ?)";
         $stmt = mysql::getInstance()->prepare($query);
         $parameters = array(
             $data['name'],
             $data['price'],
             $data['description'],
-            $data['image']
+            $data['image'],
+            $data['warranty']
         );
         try {
             $stmt->execute($parameters);
