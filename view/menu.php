@@ -1,13 +1,6 @@
 <?php
 
 $menuLeft = array(
-//    'contract' => 'Sutartys',
-//    'service' => 'Paslaugos',
-//    'customer' => 'Klientai',
-//    'employee' => 'Darbuotojai',
-//    'car' => 'Automobiliai',
-//    'brand' => 'Markės',
-//    'model' => 'Modeliai',
     'snowboard' => 'Snowboards',
     'order' => 'Orders'
 );
