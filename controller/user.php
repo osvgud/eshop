@@ -3,6 +3,7 @@ require_once 'utils/paging.class.php';
 require_once 'utils/validator.class.php';
 require_once 'model/users.class.php';
 require_once  'model/snowboards.class.php';
+require_once  'model/orders.class.php';
 
 class userController {
 
@@ -57,6 +58,7 @@ class userController {
         $data = $this->validateInput();
         if ($data) {
             if (users::insertUser($data)) {
+                orders::createOrderForUser();
                 routing::redirect(routing::getModule(), 'list');
             } else {
                 $template = template::getInstance();

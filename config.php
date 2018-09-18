@@ -2,7 +2,7 @@
 
 //define('DB_SERVER', 'localhost');
 //define('DB_NAME', 'osvgud');
-//define('DB_USERNAME', 'wzdevhzxmamrgy');
+//define('DB_USERNAME', 'osvgud');
 //define('DB_PASSWORD', 'ko8ahno6ainuWaez');
 //define('DB_PREFIX', '');
 //
