@@ -45,16 +45,16 @@
                 . "<td>";
             if ($_SESSION['userlevel'] == 5) {
                 echo
-                    "<a href='".routing::getURL($module, 'edit', 'id=' . $val['id']), "' title=''>edit </a>"
+                    "<a href='" . routing::getURL($module, 'edit', 'id=' . $val['id']), "' title=''>edit </a>"
                     . "<a href='#' onclick='showConfirmDialog(\"{$module}\", \"{$val['id']}\"); return false;' title=''>šalinti</a>&nbsp;";
+            } else {
+                if ($_SESSION['username'] != '' && $_SESSION['username'] != 'Svečias') {
+                    echo "<a style='color: blue;' href='" . routing::getURL('cart_item', 'create', 'id=' . $val['id']) . "'>ADD TO CART</a>";
+                }
+                echo
+                    "</td>"
+                    . "</tr>\n";
             }
-            else{
-                echo "<a href='".routing::getURL('cart_item', 'create', 'id='.$val['id'])."'>ADD TO CART</a>";
-
-            }
-            echo
-                "</td>"
-                ."</tr>\n";
         }
         ?>
     </table>

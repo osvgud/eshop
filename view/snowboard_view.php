@@ -18,13 +18,12 @@
                     ."<td id='image'><img id='snow_view' src='images/{$data['image']}'</td>"
                     ."<td>"
                         ."<div class='waranty'>"
-                        ."<p>Warranty: {$data['warranty']} Years</p>"
-                        ."<p>Price: {$data['price']}$</p>"
+                        ."<p><b style='font-weight:bold;'>Warranty:</b> {$data['warranty']} Years</p>"
+                        ."<p><b style='font-weight:bold;'>Description:</b> {$data['description']}</p>"
+                        ."<p id='price'><b style='font-weight:bold;'>Price:</b> {$data['price']}$</p>"
+                        ."<p id='add_to_cart'><a style='color: blue;' href='".routing::getURL('cart_item', 'create', 'id='.$data['id'])."'>ADD TO CART</a></p>"
                         ."</div>"
                     ."</td>"
-                    ."</tr>"
-                    ."<tr>"
-                    ."<a href='".routing::getURL('cart_item', 'create', 'id='.$data['id'])."'>ADD TO CART</a>"
                     ."</tr>"
                 ?>
         </tbody>

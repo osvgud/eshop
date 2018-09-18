@@ -52,6 +52,46 @@ class orderController {
         $template->setView("order_list");
     }
 
+    public function sortAction()
+    {
+        $_SESSION['currMod'] = 'order';
+        $orderby = routing::getId();
+        if($orderby) {
+            if ($orderby == $_SESSION['orderby'] and $_SESSION['fromto'] == 'ASC') {
+                $_SESSION['fromto'] = 'DESC';
+            } elseif ($orderby == $_SESSION['orderby'] and $_SESSION['fromto'] == 'DESC') {
+                $_SESSION['fromto'] = 'ASC';
+            } else {
+                $_SESSION['fromto'] = 'ASC';
+            }
+            $_SESSION['orderby'] = $orderby;
+        }
+        // suskaičiuojame bendrą įrašų kiekį
+        $elementCount = orders::getOrdersListCount();
+
+        // sukuriame puslapiavimo klasės objektą
+        $paging = new paging(NUMBER_OF_ROWS_IN_PAGE);
+
+        // suformuojame sąrašo puslapius
+        $paging->process($elementCount, routing::getPageId());
+
+        // išrenkame nurodyto puslapio markes
+        $data = orders::getOrdersListOrder($paging->size, $paging->first, $orderby);
+
+        $template = template::getInstance();
+
+        $template->assign('data', $data);
+        $template->assign('pagingData', $paging->data);
+
+        if (!empty($_GET['delete_error']))
+            $template->assign('delete_error', true);
+
+        if (!empty($_GET['id_error']))
+            $template->assign('id_error', true);
+
+        $template->setView("order_list");
+    }
+
     public function createAction()
     {
         $data = $this->validateInput();

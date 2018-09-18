@@ -96,9 +96,32 @@ class orders
         return true;
     }
 
+    public static function getOrdersListOrder($limit = null, $offset = null, $orderby) {
+        $query = "select snowboards.id as snowboard_id, orders.id as order_id, cart_items.fk_user as username, first_name, last_name,"
+            ."orders.price as sum_price, snowboards.name as snowboard_name, snowboards.price as snowboard_price, "
+            ."image from cart_items INNER JOIN orders ON cart_items.fk_order = orders.id INNER JOIN snowboards on snowboards.id"
+            ."= cart_items.fk_snowboard WHERE state = 'ordered' ORDER BY ".$orderby." ".$_SESSION['fromto'];
+
+        $parameters = array();
+
+        if(isset($limit)) {
+            $query .= " LIMIT ?";
+            $parameters[] = $limit;
+        }
+        if(isset($offset)) {
+            $query .= " OFFSET ?";
+            $parameters[] = $offset;
+        }
+
+        $stmt = mysql::getInstance()->prepare($query);
+        $stmt->execute($parameters);
+        $data = $stmt->fetchAll();
+        return $data;
+    }
+
     public static function getOrdersList($limit = null, $offset = null)
     {
-        $query = "select orders.id as order_id, cart_items.fk_user as username, first_name, last_name,"
+        $query = "select snowboards.id as snowboard_id, orders.id as order_id, cart_items.fk_user as username, first_name, last_name,"
         ."orders.price as sum_price, snowboards.name as snowboard_name, snowboards.price as snowboard_price, "
         ."image from cart_items INNER JOIN orders ON cart_items.fk_order = orders.id INNER JOIN snowboards on snowboards.id"
             ."= cart_items.fk_snowboard WHERE state = 'ordered'";
