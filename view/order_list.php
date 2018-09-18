@@ -3,22 +3,9 @@
         <li><a href="<?php echo routing::getURL(); ?>">Pradžia</a></li>
         <li>Orders</li>
     </ul>
-    <div id="actions">
-        <a href='<?php echo routing::getURL($module, 'create'); ?>'>New Snowboard</a>
-    </div>
     <div class="float-clear"></div>
 
-<?php if (!empty($delete_error)) { ?>
-    <div class="errorBox">
-        Klientas nebuvo pašalintas, nes turi užsakymą (-ų).
-    </div>
-<?php } ?>
-
-<?php if (!empty($id_error)) { ?>
-    <div class="errorBox">
-        Klientas nerastas!
-    </div>
-<?php } $fname = 'first_name'; $lname = 'last_name'; $sprice = 'sum_price';?>
+<?php $fname = 'first_name'; $lname = 'last_name'; $sprice = 'sum_price';?>
 
     <table>
         <tr>
@@ -30,7 +17,7 @@
         // suformuojame lentelę
         $k = 0;
         foreach ($data as &$val) {
-            $next = next($data);
+            $next = current($data);
             if ($k == 0) {
                 echo
                     "<tr>"

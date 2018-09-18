@@ -32,7 +32,7 @@ class orderController {
         $elementCount = orders::getOrdersListCount();
 
         // sukuriame puslapiavimo klasės objektą
-        $paging = new paging(NUMBER_OF_ROWS_IN_PAGE);
+        $paging = new paging(25);
 
         $paging->process($elementCount, routing::getPageId());
 
@@ -70,7 +70,7 @@ class orderController {
         $elementCount = orders::getOrdersListCount();
 
         // sukuriame puslapiavimo klasės objektą
-        $paging = new paging(NUMBER_OF_ROWS_IN_PAGE);
+        $paging = new paging(25);
 
         // suformuojame sąrašo puslapius
         $paging->process($elementCount, routing::getPageId());

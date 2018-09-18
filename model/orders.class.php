@@ -144,7 +144,8 @@ class orders
 
     public static function getOrdersListCount()
     {
-        $query = "SELECT COUNT(`id`) AS `count` FROM `" . DB_PREFIX . "orders`";
+        $query = "SELECT COUNT(fk_order) as count FROM cart_items INNER JOIN orders ON cart_items.fk_order = orders.id INNER JOIN snowboards on snowboards.id
+            = cart_items.fk_snowboard WHERE state = 'ordered'";
         $stmt = mysql::getInstance()->query($query);
         $data = $stmt->fetchAll();
         return $data[0]['count'];
